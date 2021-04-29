@@ -16,7 +16,9 @@ func main() {
 }
 
 func homePageHandler(w http.ResponseWriter, r *http.Request) {
-	_, err := fmt.Fprintf(w, "hello world")
+	var h homePage = NewHomePage()
+	message := h.Hello()
+	_, err := fmt.Fprintf(w, "%s", message)
 	checkError(err)
 }
 

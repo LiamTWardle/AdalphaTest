@@ -1,2 +1,6 @@
 # Editor
 .vscode/
+
+# Built code
+*.exe
+
