@@ -6,8 +6,18 @@ import (
 	"net/http"
 )
 
-func main() {
-	http.HandleFunc("/", homePageHandler)
+type server struct {
+	homePage HomePage
+}
+
+func NewServer(homePage HomePage) *server {
+	s := new(server)
+	s.homePage = homePage
+	return s
+}
+
+func (s server) Listen() {
+	http.HandleFunc("/", s.HomePageHandler)
 
 	fmt.Println("Server listening on port 3000")
 	log.Panic(
@@ -15,14 +25,13 @@ func main() {
 	)
 }
 
-func homePageHandler(w http.ResponseWriter, r *http.Request) {
-	var h homePage = NewHomePage()
-	message := h.Hello()
+func (s server) HomePageHandler(w http.ResponseWriter, r *http.Request) {
+	message := s.homePage.Hello()
 	_, err := fmt.Fprintf(w, "%s", message)
-	checkError(err)
+	CheckError(err)
 }
 
-func checkError(err error) {
+func CheckError(err error) {
 	if err != nil {
 		log.Panic(err)
 	}

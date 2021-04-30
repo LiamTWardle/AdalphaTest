@@ -1,19 +1,19 @@
 package main
 
-type homePage interface {
+type HomePage interface {
 	Hello() string
 }
 
-type helloWorldHomePage struct {
+type HelloWorldHomePage struct {
 	helloMessage string
 }
 
-func NewHomePage() *helloWorldHomePage {
-	h := new(helloWorldHomePage)
+func NewHomePage() *HelloWorldHomePage {
+	h := new(HelloWorldHomePage)
 	h.helloMessage = "Hello World"
 	return h
 }
 
-func (h helloWorldHomePage) Hello() string {
+func (h HelloWorldHomePage) Hello() string {
 	return h.helloMessage
 }
