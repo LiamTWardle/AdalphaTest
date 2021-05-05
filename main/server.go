@@ -7,12 +7,12 @@ import (
 )
 
 type server struct {
-	homePage HomePage
+	portfolio Portfolio
 }
 
-func NewServer(homePage HomePage) *server {
+func NewServer(portfolio Portfolio) *server {
 	s := new(server)
-	s.homePage = homePage
+	s.portfolio = portfolio
 	return s
 }
 
@@ -26,8 +26,8 @@ func (s server) Listen() {
 }
 
 func (s server) HomePageHandler(w http.ResponseWriter, r *http.Request) {
-	message := s.homePage.Hello()
-	_, err := fmt.Fprintf(w, "%s", message)
+	instruction := s.portfolio.Withdraw(10)
+	_, err := fmt.Fprintf(w, "%s", instruction)
 	CheckError(err)
 }
 
